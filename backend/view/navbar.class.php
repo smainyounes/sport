@@ -11,6 +11,8 @@
 		{
 			$this->text = $this->Text();
 			$this->Head($page);
+
+			$this->Guest();
 		}
 
 		private function Text()
@@ -23,6 +25,7 @@
 					 "login" => "Identifier",
 					 "all" => "Tout",
 					 "lang" => "Langue",
+					 "aboutus" => "A propos",
 					 "search" => "Chercher");
 					break;
 				
@@ -33,6 +36,7 @@
 					 "login" => "دخول",
 					 "all" => "الكل",
 					 "lang" => "لغة",
+					 "aboutus" => "معلومات عنا",
 					 "search" => "بحث");
 					break;
 
@@ -56,6 +60,9 @@
 			    <!-- Bootstrap CSS -->
 			    <link rel="stylesheet" href="<?php echo(PUBLIC_URL) ?>vendor/bootstrap/css/bootstrap.min.css">
 
+			    <!-- flag icon -->
+			    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
+
 			    <!-- animate css -->
 			    <link rel="stylesheet" type="text/css" href="<?php echo(PUBLIC_URL) ?>vendor/animatecss/animate.css">
 
@@ -73,6 +80,47 @@
 			  </head>
 			  <body>
 			  	
+			<?php
+		}
+
+		public function Guest()
+		{
+			?>
+
+			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+			  <a class="navbar-brand" href="#"><?php echo WEBSITE_NAME; ?></a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			    <ul class="navbar-nav ml-auto">
+			      <li class="nav-item">
+			        <a class="nav-link" href="#"><?php echo $this->text['home']; ?></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#"><?php echo $this->text['aboutus']; ?></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#"><?php echo $this->text['contact']; ?></a>
+			      </li>
+			      <li class="nav-item dropdown">
+			      	<a class="nav-link dropdown-toggle" href="" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $this->text['lang']; ?></a>
+			      	<div class="dropdown-menu text-center dropdown-menu-right" aria-labelledby="dropdown09">
+			      	    <a class="dropdown-item" href="?lang=ar"><span class="flag-icon flag-icon-dz"> </span>  عربية</a>
+			      	    <a class="dropdown-item" href="?lang=fr"><span class="flag-icon flag-icon-fr"> </span> Français</a>
+			      	</div>
+			      </li>
+			      <li class="nav-item">
+			      	<a href="#" class="btn btn-secondary"><?php echo $this->text['login']; ?></a>
+			      </li>
+			    </ul>
+			    
+			  </div>
+			</nav>
+
+			<div class="container h-100">
+
 			<?php
 		}
 
