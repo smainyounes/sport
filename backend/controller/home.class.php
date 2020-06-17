@@ -18,8 +18,8 @@
 			new view_navbar;
 
 			// calling the content
-			$view = new view_home();
-			$view->Welcome();
+			$view = new view_sport();
+			$view->SearchFormHome();
 
 			// include footer
 			include BACKEND_URL."includes/footer.inc.php";

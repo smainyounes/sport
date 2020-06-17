@@ -26,7 +26,9 @@
 					 "all" => "Tout",
 					 "lang" => "Langue",
 					 "aboutus" => "A propos",
-					 "search" => "Chercher");
+					 "test" => "Testing",
+					 "detail" => "Detail",
+					 "search" => "Recherche");
 					break;
 				
 				case 'ar':
@@ -37,6 +39,8 @@
 					 "all" => "الكل",
 					 "lang" => "لغة",
 					 "aboutus" => "معلومات عنا",
+					 "test" => "Testing",
+					 "detail" => "تفاصيل",
 					 "search" => "بحث");
 					break;
 
@@ -60,15 +64,23 @@
 			    <!-- Bootstrap CSS -->
 			    <link rel="stylesheet" href="<?php echo(PUBLIC_URL) ?>vendor/bootstrap/css/bootstrap.min.css">
 
+			    <!-- font awesome -->
+			    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+			    
 			    <!-- flag icon -->
 			    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
 
 			    <!-- animate css -->
 			    <link rel="stylesheet" type="text/css" href="<?php echo(PUBLIC_URL) ?>vendor/animatecss/animate.css">
 
+			    <!-- smooth product CSS -->
+			    <link rel="stylesheet" type="text/css" href="<?php echo(PUBLIC_URL) ?>vendor/smoothproducts/css/smoothproducts.css">
+
 			    <!-- custom css -->
 			    <link rel="stylesheet" href="<?php echo(PUBLIC_URL) ?>css/custom.css">
-			    
+
+				<!-- Wilaya / commune js -->
+				<script src="<?php echo(PUBLIC_URL) ?>vendor/dzayer/dz2.js"></script>			    
 
 			    <!-- Optional JavaScript -->
 			    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -76,9 +88,12 @@
 			    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 			    <script src="<?php echo(PUBLIC_URL) ?>vendor/bootstrap/js/bootstrap.min.js"></script>
 
+			    <!-- smooth product JS -->
+			    <script type="text/javascript" src="<?php echo(PUBLIC_URL) ?>vendor/smoothproducts/js/smoothproducts.min.js"></script>
+
 			    <title><?php echo WEBSITE_NAME." | ".$this->text[$page]; ?></title>
 			  </head>
-			  <body>
+			  <body class="d-flex flex-column">
 			  	
 			<?php
 		}
@@ -88,7 +103,7 @@
 			?>
 
 			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-			  <a class="navbar-brand" href="#"><?php echo WEBSITE_NAME; ?></a>
+			  <a class="navbar-brand" href="<?php echo(PUBLIC_URL) ?>"><?php echo WEBSITE_NAME; ?></a>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
@@ -96,13 +111,13 @@
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			    <ul class="navbar-nav ml-auto">
 			      <li class="nav-item">
-			        <a class="nav-link" href="#"><?php echo $this->text['home']; ?></a>
+			        <a class="nav-link" href="<?php echo(PUBLIC_URL) ?>"><?php echo $this->text['home']; ?></a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="#"><?php echo $this->text['aboutus']; ?></a>
+			        <a class="nav-link" href="<?php echo(PUBLIC_URL.'about') ?>"><?php echo $this->text['aboutus']; ?></a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="#"><?php echo $this->text['contact']; ?></a>
+			        <a class="nav-link" href="<?php echo(PUBLIC_URL).'contact' ?>"><?php echo $this->text['contact']; ?></a>
 			      </li>
 			      <li class="nav-item dropdown">
 			      	<a class="nav-link dropdown-toggle" href="" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $this->text['lang']; ?></a>
@@ -112,14 +127,14 @@
 			      	</div>
 			      </li>
 			      <li class="nav-item">
-			      	<a href="#" class="btn btn-secondary"><?php echo $this->text['login']; ?></a>
+			      	<a href="<?php echo(PUBLIC_URL.'login') ?>" class="btn btn-secondary"><?php echo $this->text['login']; ?></a>
 			      </li>
 			    </ul>
 			    
 			  </div>
 			</nav>
 
-			<div class="container h-100">
+			<div class="container pt-4" id="page-content">
 
 			<?php
 		}

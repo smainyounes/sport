@@ -1,8 +1,28 @@
 html,body{
   height: 100vh;
   background-size: cover;
+  padding-top: 28px;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+.crop-center{
+	object-fit: cover; /* Do not scale the image */
+	object-position: center; /* Center the image within the element */
+	max-height: 40px;
+	margin-bottom: 1rem;
+}
+
+.sp-wrap {
+    max-width: 100%;
 }
