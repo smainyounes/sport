@@ -18,7 +18,7 @@
 
     public function __construct(){
       // Set DSN
-      $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+      $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname .';charset=utf8';
       $options = array(
         PDO::ATTR_PERSISTENT => true,
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
