@@ -46,7 +46,7 @@
 		public function Inscription()
 		{
 			$sql = "INSERT INTO 
-						salle(nom, username, password, wilaya, commune, address, tel, img_prof, img_cover, description) 
+						salle(nom, username, password, wilaya, commune, address, tel, img_prof, img_cover, description_salle) 
 						VALUES(:nom, :username, :password, :wilaya, :commune, :address, :tel, :img_prof, :img_cover, :description)";
 			$this->query($sql);
 
