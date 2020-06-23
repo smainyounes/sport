@@ -20,6 +20,8 @@
 					 "error" => "Erreur",
 					 "info_sa" => "Info salle",
 					 "detail" => "Detail",
+					 "address" => "Addresse",
+					 "tel" => "Telephone",
 					 "exemple" => "Exemple: Karaté",
 					 "nothing" => "Aucun sport trouvé",
 					 "search" => "Recherche");
@@ -31,6 +33,8 @@
 					 "error" => "خطأ",
 					 "info_sa" => "معلومات عن الصالة الرياضية",
 					 "detail" => "تفاصيل",
+					 "address" => "عنوان",
+					 "tel" => "هاتف",
 					 "exemple" => "مثال: الكاراتيه",
 					 "nothing" => "لم يتم العثور على رياضة",
 					 "search" => "بحث");
@@ -59,7 +63,7 @@
 			    <p class="card-text"><?php echo "$data->wilaya , $data->commune"; ?></p>
 			  </div>
 			  <div class="card-footer text-muted">
-			  	<a href="<?php echo (PUBLIC_URL.'salle/'.$data->id_salle) ?>">
+			  	<a href="<?php echo (PUBLIC_URL.'salle/profile/'.$data->id_salle) ?>">
 				  	<img class="rounded-circle float-left mr-2" width="30px" height="30px" src="<?php echo(PUBLIC_URL.'img/'.$data->img_prof) ?>" alt="Card image cap">
 			  	</a>
 			  	<div class="text-muted"><?php echo "$data->nom"; ?></div>
@@ -143,9 +147,9 @@
 			</div>
 
 			<nav>
-			  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-			    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><?php echo $this->text['info_sp']; ?></a>
-			    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><?php echo $this->text['info_sa']; ?></a>
+			  <div class="nav nav-tabs text-center" id="nav-tab" role="tablist">
+			    <a class="nav-item nav-link flex-fill active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><?php echo $this->text['info_sp']; ?></a>
+			    <a class="nav-item nav-link flex-fill" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><?php echo $this->text['info_sa']; ?></a>
 			  </div>
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
@@ -167,17 +171,19 @@
 			  <div class="tab-pane fade p-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 			  	<div class="mt-3 d-flex flex-column flex-md-row">
 			  		<div class="text-center">
-			  			<img class="rounded-circle" src="<?php echo(PUBLIC_URL.'img/'.$data->img_prof) ?>" width="150px" height="150px">
+			  			<a href="<?php echo(PUBLIC_URL.'salle/profile/'.$data->id_salle) ?>">
+			  				<img class="rounded-circle" src="<?php echo(PUBLIC_URL.'img/'.$data->img_prof) ?>" width="150px" height="150px">
+			  			</a>
 			  			<div class="h2 mt-4"><?php echo ucfirst($data->nom); ?></div>
 			  		</div>
 			  		<div class="px-md-3 ml-md-3 align-self-center">
 			  			<table class="table table-borderless">
 			  				<tr>
-			  					<td class="h6">Address</td>
+			  					<td class="h6"><?php echo $this->text['address']; ?></td>
 			  					<td><?php echo "$data->wilaya, $data->commune, ".ucfirst($data->address);?></td>
 			  				</tr>
 			  				<tr>
-			  					<td class="h6">Telephone</td>
+			  					<td class="h6"><?php echo $this->text['tel']; ?></td>
 			  					<td><?php echo $data->tel; ?></td>
 			  				</tr>
 			  			</table>
@@ -191,6 +197,52 @@
 			  </div>
 			</div>
 
+
+			<?php
+		}
+
+		public function BySalle($id_salle, $page)
+		{
+			$mod = new model_sport();
+
+			$data = $mod->GetBySalle($id_salle, $page);
+
+			$total_sports = $mod->CountBySalle($id_salle);
+
+			$total_pages = ceil($total_sports / 20);
+
+			?>
+
+			<?php if($data): ?>
+
+			<div class="row justify-content-center">
+				<?php foreach($data as $sport): ?>
+
+				<div class="col-sm-4 col-md-3">
+					<?php $this->SportCard($sport) ?>
+				</div>
+
+				<?php endforeach; ?>
+			</div>
+
+			<?php if($total_pages > 1): ?>
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination flex-wrap justify-content-center">
+			  	<?php for($i = 1; $i <= $total_pages; $i++): ?>
+			  		<?php if($i == $page): ?>
+			  			<li class="page-item active"><a class="page-link" href="#"><?php echo $i; ?></a></li>
+			  		<?php else: ?>
+			  			<li class="page-item"><a class="page-link" href="<?php echo(PUBLIC_URL.'salle/profile/'.$id_salle.'/'.$i) ?>"><?php echo $i; ?></a></li>
+			  		<?php endif; ?>
+			    
+				<?php endfor; ?>
+			  </ul>
+			</nav>
+			<?php endif; ?>
+
+			<?php else: ?>
+				<?php $this->Nothing(); ?>
+			<?php endif; ?>
 
 			<?php
 		}

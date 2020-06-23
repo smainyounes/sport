@@ -130,6 +130,16 @@
 			return $res->nbr;
 		}
 
+		public function CountBySalle($id_salle)
+		{
+			$this->query("SELECT COUNT(id_sport) nbr FROM sport WHERE id_salle = :id");
+
+			$this->bind(":id", $id_salle);
+
+			$res = $this->single();
+			return $res->nbr;
+		}
+
 		/**
 		 * Setters
 		 */

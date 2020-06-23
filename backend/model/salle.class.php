@@ -3,7 +3,7 @@
 	/**
 	 * 
 	 */
-	class model_salle extends lib_db
+	class model_salle extends lib_database
 	{
 		
 		function __construct()
@@ -18,7 +18,7 @@
 		public function Detail($id_salle)
 		{
 			
-			$this->query("SELECT * FROM salle WHERE id_sport = :id");
+			$this->query("SELECT * FROM salle WHERE id_salle = :id");
 			$this->bind(":id", $id_salle);
 			return $this->single();
 			 
