@@ -34,3 +34,8 @@ html {
 .sp-wrap {
     max-width: 100%;
 }
+
+.edit-button-grp{
+  position: absolute;
+  right: 0;
+}

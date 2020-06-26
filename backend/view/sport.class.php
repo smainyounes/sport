@@ -24,6 +24,9 @@
 					 "tel" => "Telephone",
 					 "exemple" => "Exemple: Karaté",
 					 "nothing" => "Aucun sport trouvé",
+					 "edit_info" => "Modifier les infos",
+					 "edit_img" => "Modifier les images",
+					 "delete" => "Supprimer",
 					 "search" => "Recherche");
 					break;
 				
@@ -37,6 +40,9 @@
 					 "tel" => "هاتف",
 					 "exemple" => "مثال: الكاراتيه",
 					 "nothing" => "لم يتم العثور على رياضة",
+					 "edit_info" => "تعديل المعلومات",
+					 "edit_img" => "تعديل الصور",
+					 "delete" => "حذف",
 					 "search" => "بحث");
 					break;
 
@@ -51,6 +57,24 @@
 				<a href="<?php echo(PUBLIC_URL.'sport/detail/'.$data->id_sport) ?>">
 			  		<img class="card-img-top" src="<?php echo(PUBLIC_URL.'img/'.$data->link) ?>" alt="Card image cap">
 				</a>
+
+				<?php if(isset($_SESSION['salle']) && $data->id_salle == $_SESSION['salle']): ?>
+				<div class="btn-group m-1 edit-button-grp">
+					<div class="dropdown">
+					  <a class="btn btn-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <i class="fas fa-edit"></i>
+					  </a>
+
+					  <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" href="#"><?php echo $this->text['edit_info']; ?></a>
+					    <a class="dropdown-item" href="#"><?php echo $this->text['edit_img']; ?></a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item text-danger" href="#"><?php echo $this->text['delete']; ?> <i class="fas fa-trash"></i></a>
+					  </div>
+					</div>
+				</div>
+				<?php endif; ?>
+
 			  <div class="card-body">
 			    <h5 class="card-title">
 			    	<?php 
@@ -61,6 +85,8 @@
 			    	 ?>
 			    </h5>
 			    <p class="card-text"><?php echo "$data->wilaya , $data->commune"; ?></p>
+
+
 			  </div>
 			  <div class="card-footer text-muted">
 			  	<a href="<?php echo (PUBLIC_URL.'salle/profile/'.$data->id_salle) ?>">
@@ -135,7 +161,7 @@
 			$images = $img_mod->GetImages($id_sport);
 			?>
 
-			<div class="h1 text-center mb-4"><?php echo $this->text['detail']; ?></div>
+			<div class="h1 text-center my-4"><?php echo $this->text['detail']; ?></div>
 
 			<div class="d-flex">
 				<div class="sp-loading"><img src="<?php echo(PUBLIC_URL) ?>img/sp-loading.gif" alt=""><br><?php echo $this->text['loading']; ?></div>

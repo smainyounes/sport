@@ -19,6 +19,7 @@
 					 "infos" => "Information",
 					 "description" => "Description",
 					 "address" => "Addresse",
+					 "add" => "Ajouter sport",
 					 "tel" => "Telephone");
 					break;
 				
@@ -27,6 +28,7 @@
 					 "infos" => "معلومات",
 					 "description" => "تفصيل",
 					 "address" => "عنوان",
+					 "add" => "إضافة رياضة",
 					 "tel" => "هاتف");
 					break;
 
@@ -59,6 +61,13 @@
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
 			  <div class="tab-pane fade my-4 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+			  	
+			  	<?php if(isset($_SESSION['salle']) && $id_salle == $_SESSION['salle']): ?>
+			  	<div class="text-center my-4">
+			  		<a class="btn btn-outline-secondary btn-lg" href="#"><?php echo $this->text['add']; ?> <i class="fas fa-plus"></i></a>
+			  	</div>
+			  	<?php endif; ?>
+
 			  	<?php 
 
 			  		$view->BySalle($id_salle, $page);
@@ -66,6 +75,11 @@
 			  	 ?>
 			  </div>
 			  <div class="tab-pane fade my-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+			  	<?php if(isset($_SESSION['salle']) && $id_salle == $_SESSION['salle']): ?>
+			  	<a class="text-secondary float-right" href="#"><i class="fas fa-edit"></i></a>
+			  	<?php endif; ?>
+
 			  	<table class="table table-borderless">
 			  		<tr>
 			  			<td><?php echo $this->text['address']; ?></td>
@@ -78,6 +92,11 @@
 			  	</table>
 			  </div>
 			  <div class="tab-pane fade my-4" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+			  	<?php if(isset($_SESSION['salle']) && $id_salle == $_SESSION['salle']): ?>
+			  	<a class="text-secondary float-right" href="#"> <i class="fas fa-edit"></i></a>
+			  	<?php endif; ?>
+
 			  	<?php echo $userinfo->description_salle; ?>
 			  </div>
 			</div>

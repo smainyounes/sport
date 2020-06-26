@@ -22,12 +22,15 @@
 					return array('home' => "Accueil",
 					 "contact" => "Contact",
 					 "error" => "Erreur",
-					 "login" => "Identifier",
+					 "login" => "S'identifier",
+					 "logout" => "Se déconnecter",
 					 "all" => "Tout",
 					 "lang" => "Langue",
 					 "aboutus" => "A propos",
 					 "test" => "Testing",
 					 "detail" => "Detail",
+					 "settings" => "Paramètres",
+					 "profile" => "Profile",
 					 "search" => "Recherche");
 					break;
 				
@@ -36,11 +39,14 @@
 					 "contact" => "اتصل",
 					 "error" => "خطأ",
 					 "login" => "دخول",
+					 "logout" => "تسجيل خروج",
 					 "all" => "الكل",
 					 "lang" => "لغة",
 					 "aboutus" => "معلومات عنا",
 					 "test" => "Testing",
 					 "detail" => "تفاصيل",
+					 "settings" => "الإعدادات",
+					 "profile" => "الصفحة الشخصية",
 					 "search" => "بحث");
 					break;
 
@@ -109,7 +115,7 @@
 			  </button>
 
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			    <ul class="navbar-nav ml-auto">
+			    <ul class="navbar-nav ml-auto d-flex align-items-center">
 			      <li class="nav-item">
 			        <a class="nav-link" href="<?php echo(PUBLIC_URL) ?>"><?php echo $this->text['home']; ?></a>
 			      </li>
@@ -126,15 +132,42 @@
 			      	    <a class="dropdown-item" href="?lang=fr"><span class="flag-icon flag-icon-fr"> </span> Français</a>
 			      	</div>
 			      </li>
-			      <li class="nav-item">
-			      	<a href="<?php echo(PUBLIC_URL.'login') ?>" class="btn btn-secondary"><?php echo $this->text['login']; ?></a>
-			      </li>
+			      <?php if(isset($_SESSION['salle'])): ?>
+			      	<?php $this->SalleDropDown($_SESSION['salle']); ?>
+			      <?php else: ?>
+			      	<li class="nav-item">
+			      		<a href="<?php echo(PUBLIC_URL.'salle/login') ?>" class="btn btn-secondary"><?php echo $this->text['login']; ?></a>
+			      	</li>
+			      <?php endif; ?>
+			      
 			    </ul>
 			    
 			  </div>
 			</nav>
 
-			<div class="container pt-4" id="page-content">
+			<div class="container pt-3" id="page-content">
+
+			<?php
+		}
+
+		public function SalleDropDown($id_salle)
+		{
+			$mod = new model_salle();
+			$data = $mod->Detail($id_salle);
+
+			?>
+
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="" id="salle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+					<img class="rounded-circle" src="<?php echo(PUBLIC_URL.'img/'.$data->img_prof); ?>" width="40px" height="40px">
+				</a>
+				<div class="dropdown-menu text-center dropdown-menu-right" aria-labelledby="salle">
+				    <a class="dropdown-item" href="<?php echo(PUBLIC_URL.'salle/profile/'.$id_salle) ?>"><?php echo $this->text['profile']; ?></a>
+				    <a class="dropdown-item" href="<?php echo(PUBLIC_URL.'salle/settings/') ?>"><?php echo $this->text['settings']; ?></a>
+				    <div class="dropdown-divider"></div>
+				    <a class="dropdown-item" href="<?php echo(PUBLIC_URL.'salle/logout/') ?>"><?php echo $this->text['logout']; ?> <i class="fas fa-sign-out-alt"></i></a>
+				</div>
+			</li>
 
 			<?php
 		}
