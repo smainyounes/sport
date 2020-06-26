@@ -46,7 +46,7 @@
 						    FROM img as T2BIS -- just an alias table
 						    WHERE T2BIS.id_sport = sport.id_sport -- usual join
 						    AND img.id_img > T2BIS.id_img -- change operator to take the last instead of the first
-						) AND salle.id_salle = sport.id_salle AND sport.id_sport = :id ORDER BY sport.id_sport DESC LIMIT $limit OFFSET $start";
+						) AND salle.id_salle = sport.id_salle AND salle.id_salle = :id ORDER BY sport.id_sport DESC LIMIT $limit OFFSET $start";
 			$this->query($sql);
 			$this->bind(":id", $id_salle);
 
