@@ -57,6 +57,30 @@
 
 			header("Location: ".PUBLIC_URL);
 		}
+
+		public function Inscription()
+		{
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				if (isset($_POST['tokken']) && $_POST['tokken'] === $_SESSION['tokken']) {
+					$mod = new model_salle();
+					if ($mod->Inscription()) {
+						header("Location: ".PUBLIC_URL."salle/login");
+					}
+				}
+			}
+
+			$_SESSION['tokken'] = token();
+
+			// head & navbar
+			new view_navbar("test");
+
+			$view = new view_salle();
+			$view->Inscription();
+
+			// footer
+			include BACKEND_URL.'includes/footer.inc.php';
+		}
+
 	}
 
  ?>

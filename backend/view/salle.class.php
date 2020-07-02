@@ -20,6 +20,12 @@
 					 "description" => "Description",
 					 "address" => "Addresse",
 					 "add" => "Ajouter sport",
+					 "register" => "S'inscrire",
+					 "username" => "Nom d'utilisateur",
+					 "password" => "Mot de passe",
+					 "repassword" => "Répéter le mot de passe",
+					 "nom" => "Nom salle de sport",
+					 "register" => "S'inscrire",
 					 "tel" => "Telephone");
 					break;
 				
@@ -29,6 +35,12 @@
 					 "description" => "تفصيل",
 					 "address" => "عنوان",
 					 "add" => "إضافة رياضة",
+					 "register" => "تسجيل",
+					 "username" => "اسم المستخدم",
+					 "password" => "كلمة السر",
+					 "repassword" => "اعد كلمة السر",
+					 "nom" => "اسم الصالة الرياضية",
+					 "register" => "تسجيل",
 					 "tel" => "هاتف");
 					break;
 
@@ -127,6 +139,65 @@
 						<div class="col-md-2 my-2">
 							<button class="btn btn-primary btn-lg"><i class="fas fa-search"></i></button>
 						</div>						
+					</form>
+				</div>
+			</div>
+
+			<?php
+		}
+
+		public function Inscription()
+		{
+			?>
+
+			<div class="h-100 d-flex justify-content-center">
+				<div class="container align-self-center p-4 border text-center">
+					<i class="fas fa-10x fa-users text-center my-2"></i>
+					<div class="display-4 mb-4"><?php echo $this->text['register']; ?></div>
+					<form method="POST">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  <input type="text" class="form-control" name="nom" placeholder="<?php echo($this->text['nom']) ?>" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  <input type="text" class="form-control" name="tel" placeholder="<?php echo($this->text['tel']) ?>" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+								  <input type="text" class="form-control" name="username" placeholder="<?php echo($this->text['username']) ?>" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+								  <input type="password" class="form-control" name="password" placeholder="<?php echo($this->text['password']) ?>" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+								  <input type="password" class="form-control" name="password2" placeholder="<?php echo($this->text['repassword']) ?>" required>
+								</div>
+							</div>
+						</div>
+					  	<div class="row">
+					  		<div class="col-md-6 d-flex flex-md-column justify-content-between">
+					  			<select name="wilaya" onchange="f1(this)" class="form-control mb-2 wil1">
+					  			</select>
+					  			<select name="commune" class="form-control com1">
+					  			</select>
+					  		</div>
+					  		<div class="col-md-6">
+					  			<textarea class="form-control" name="address" placeholder="<?php echo($this->text['address']) ?>" rows="3" required></textarea>
+					  		</div>
+					  	</div>
+					  	<textarea class="form-control my-4" name="description" rows="4" placeholder="<?php echo($this->text['description']) ?>" required></textarea>
+					  	<button class="btn btn-primary px-4 text-center"><?php echo $this->text['register']; ?> <i class="fas fa-sign-in-alt"></i></button>
+						<input type="text" name="tokken" value="<?php echo($_SESSION['tokken']); ?>" hidden>
 					</form>
 				</div>
 			</div>
