@@ -24,6 +24,52 @@
 			include BACKEND_URL.'includes/footer.inc.php';
 		}
 
+		public function Settings()
+		{
+			// checking if user loggedin
+			if (!isset($_SESSION['salle'])) {
+				header("Location: ".PUBLIC_URL."error");
+			}
+
+			// checking if data posted
+			if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+				$mod = new model_salle();
+
+				if (isset($_POST['nom'])) {
+					// update general infos
+					$mod->EditGeneralInfos();
+				}
+
+				if (isset($_POST['address'])) {
+					// update address
+					$mod->EditAddress();
+				}
+
+				if (isset($_POST['password'])) {
+					// update password
+					if ($_POST['password'] === $_POST['pass2']) {
+						$mod->ChangePassword();
+					}
+				}
+
+				if (isset($_POST['description'])) {
+					// update description
+					$mod->EditDescription();
+				}
+			}
+
+			// head & navbar
+			new view_navbar("settings");
+
+			// testing function
+			$view = new view_salle();
+			$view->Settings();
+
+			// footer
+			include BACKEND_URL.'includes/footer.inc.php';
+		}
+
 		public function Login()
 		{
 			

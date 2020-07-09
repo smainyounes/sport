@@ -17,34 +17,132 @@
 				case 'fr':
 					return array('sports' => "Les Sports",
 					 "infos" => "Information",
+					 "save" => "Enregistrer",
+					 "gen_infos" => "infos générales",
 					 "description" => "Description",
 					 "address" => "Addresse",
 					 "add" => "Ajouter sport",
 					 "register" => "S'inscrire",
 					 "username" => "Nom d'utilisateur",
 					 "password" => "Mot de passe",
+					 "old_pass" => "Ancien mot de passe",
+					 "new_pass" => "Nouveau mot de passe",
 					 "repassword" => "Répéter le mot de passe",
 					 "nom" => "Nom salle de sport",
 					 "register" => "S'inscrire",
+					 "settings" => "Paramètres",
 					 "tel" => "Telephone");
 					break;
 				
 				case 'ar':
 					return array('sports' => "رياضات",
 					 "infos" => "معلومات",
+					 "save" => "حفظ",
+					 "gen_infos" => "معلومات عامة",
 					 "description" => "تفصيل",
 					 "address" => "عنوان",
 					 "add" => "إضافة رياضة",
 					 "register" => "تسجيل",
 					 "username" => "اسم المستخدم",
 					 "password" => "كلمة السر",
+					 "old_pass" => "كلمة المرور القديمة",
+					 "new_pass" => "كلمة سر جديدة",
 					 "repassword" => "اعد كلمة السر",
 					 "nom" => "اسم الصالة الرياضية",
 					 "register" => "تسجيل",
+					 "settings" => "الإعدادات",
 					 "tel" => "هاتف");
 					break;
 
 			}
+		}
+
+		public function Settings()
+		{
+			// get user data
+			$mod = new model_salle();
+			$data = $mod->Detail($_SESSION['salle']);
+
+			?>
+
+			<h1 class="display-4 text-center my-4"><?php echo $this->text['settings']; ?></h1>
+			<div class="row">
+			  <div class="col-md-3 mb-4">
+			    <div class="nav flex-md-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+			      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><?php echo $this->text['gen_infos']; ?></a>
+			      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><?php echo $this->text['address']; ?></a>
+			      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><?php echo $this->text['description']; ?></a>
+			      <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false"><?php echo $this->text['password']; ?></a>
+			    </div>
+			  </div>
+			  <div class="col-md-9">
+			    <div class="tab-content" id="v-pills-tabContent">
+			      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+			      	<form class="row" method="POST">
+			      		<div class="col-md-4 form-group">
+			      			<label><?php echo $this->text['nom']; ?></label>
+			      			<input class="form-control" type="text" name="nom" required value="<?php echo($data->nom); ?>">
+			      		</div>
+			      		<div class="col-md-4 form-group">
+			      			<label><?php echo $this->text['username']; ?></label>
+			      			<input class="form-control" type="text" name="username" required value="<?php echo($data->username); ?>">
+			      		</div>
+			      		<div class="col-md-4 form-group">
+			      			<label><?php echo $this->text['tel']; ?></label>
+			      			<input class="form-control" type="text" name="tel" required value="<?php echo($data->tel); ?>">
+			      		</div>
+			      		<button class="btn btn-primary mx-auto"><?php echo $this->text['save'] ?></button>
+			      	</form>
+			      </div>
+			      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+			      	<form class="row" method="POST">
+			      		<div class="col-md-6 d-flex flex-md-column justify-content-between">
+			      			<select name="wilaya" required onchange="f2(this)" class="form-control mb-2 wil2">
+			      			</select>
+			      			<select name="commune" required class="form-control com2">
+			      			</select>
+			      		</div>
+			      		<div class="col-md-6">
+			      			<textarea class="form-control" name="address" placeholder="<?php echo($this->text['address']); ?>" rows="3" required><?php echo $data->address; ?></textarea>
+			      		</div>
+			      		<button class="btn btn-primary mt-4 mx-auto"><?php echo $this->text['save'] ?></button>
+			      	</form>
+			      </div>
+			      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+			      	<form method="POST">
+			      		<textarea class="form-control" name="description" placeholder="<?php echo($this->text['description']); ?>" rows="7" required><?php echo $data->description_salle; ?></textarea>
+			      		<div class="form-group text-center">
+			      			<button class="btn btn-primary my-4"><?php echo $this->text['save'] ?></button>
+			      		</div>
+			      	</form>
+			      </div>
+			      <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+			      	<form method="POST">
+			      		<div class="form-group">
+			      			<label><?php echo $this->text['old_pass']; ?></label>
+			      			<input class="form-control" type="password" name="oldpass" required>
+			      		</div>
+			      		<div class="form-group">
+			      			<label><?php echo $this->text['new_pass']; ?></label>
+			      			<input class="form-control" type="password" name="password" required>
+			      		</div>
+			      		<div class="form-group">
+			      			<label><?php echo $this->text['repassword']; ?></label>
+			      			<input class="form-control" type="password" name="pass2" required>
+			      		</div>
+			      		<div class="form-group text-center">
+				      		<button class="btn btn-primary"><?php echo $this->text['save'] ?></button>
+			      		</div>
+			      	</form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<script type="text/javascript">
+				wilaya1(<?php echo $data->wilaya; ?>, true);
+				SelectCommune(<?php echo $data->wilaya; ?>, '<?php echo($data->commune); ?>');
+			</script>
+			<?php
 		}
 
 		public function Profile($id_salle, $page)

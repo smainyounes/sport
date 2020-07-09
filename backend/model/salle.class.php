@@ -75,13 +75,62 @@
 
 		public function EditInfos()
 		{
-			$this->query("UPDATE salle SET nom = :nom, wilaya = :wilaya, commune = :commune, address = :address, tel = :tel, description = :description WHERE id_salle = :id");
+			$this->query("UPDATE salle SET nom = :nom, wilaya = :wilaya, commune = :commune, address = :address, tel = :tel, description_salle = :description WHERE id_salle = :id");
 
 			$this->bind(":nom", strip_tags($_POST['nom']));
 			$this->bind(":wilaya", strip_tags($_POST['wilaya']));
 			$this->bind(":commune", strip_tags($_POST['commune']));
 			$this->bind(":address", strip_tags($_POST['address']));
 			$this->bind(":tel", strip_tags($_POST['tel']));
+			$this->bind(":description", strip_tags($_POST['description']));
+			$this->bind(":id", $_SESSION['salle']);
+
+			try {
+				$this->execute();
+				return true;
+			} catch (Exception $e) {
+				return false;
+			}
+		}
+
+		public function EditGeneralInfos()
+		{
+			$this->query("UPDATE salle SET nom = :nom, tel = :tel, username = :username WHERE id_salle = :id");
+
+			$this->bind(":nom", strip_tags($_POST['nom']));
+			$this->bind(":tel", strip_tags($_POST['tel']));
+			$this->bind(":username", strip_tags($_POST['username']));
+			$this->bind(":id", $_SESSION['salle']);
+
+			try {
+				$this->execute();
+				return true;
+			} catch (Exception $e) {
+				return false;
+			}
+		}
+
+		public function EditAddress()
+		{
+			$this->query("UPDATE salle SET wilaya = :wilaya, commune = :commune, address = :address WHERE id_salle = :id");
+
+			$this->bind(":wilaya", strip_tags($_POST['wilaya']));
+			$this->bind(":commune", strip_tags($_POST['commune']));
+			$this->bind(":address", strip_tags($_POST['address']));
+			$this->bind(":id", $_SESSION['salle']);
+
+			try {
+				$this->execute();
+				return true;
+			} catch (Exception $e) {
+				return false;
+			}
+		}
+
+		public function EditDescription()
+		{
+			$this->query("UPDATE salle SET description_salle = :description WHERE id_salle = :id");
+
 			$this->bind(":description", strip_tags($_POST['description']));
 			$this->bind(":id", $_SESSION['salle']);
 
