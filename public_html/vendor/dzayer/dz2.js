@@ -1575,7 +1575,7 @@ var wilayas = [
  {zip:"4836", name:"Yellel",wilaya:48 },
  {zip:"4837", name:"Zemmora",wilaya:48 }] ;
 
- function wilaya1(ab) {
+ function wilaya1(ab, edit = false) {
       var outp = '';
       for (var i = 0; i < wilayas.length; i++) {
          if ((i+1)==ab) {
@@ -1584,10 +1584,15 @@ var wilayas = [
          outp +=  '<option value="'+wilayas[i].id+'" >'+wilayas[i].id+"-"+wilayas[i].name+'</option>';
         }
       }
-      document.querySelector(".wil1").innerHTML = outp;
+      
+      if (edit == true) {
+        document.querySelector(".wil2").innerHTML = outp;
+      }else{
+        document.querySelector(".wil1").innerHTML = outp;
+      }
  } 
 
-function commune11(w) {
+function commune11(w , edit = false) {
       var outp = '';
       for (var i = 0; i < communes.length; i++) {
         if (communes[i].wilaya == w){
@@ -1595,5 +1600,27 @@ function commune11(w) {
         } 
 
       }
-      document.querySelector(".com1").innerHTML = outp;
+      if (edit == true) {
+        document.querySelector(".com2").innerHTML = outp;
+      }else{
+        document.querySelector(".com1").innerHTML = outp;
+      }
+      
+ }
+
+ function SelectCommune(wilaya, commune) {
+   var outp = '';
+   for (var i = 0; i < communes.length; i++) {
+    if (communes[i].wilaya == wilaya){
+      if (communes[i].name === commune){
+        outp +=  '<option selected value="'+communes[i].name+'" >'+communes[i].name+'</option>';
+      }else{
+        outp +=  '<option value="'+communes[i].name+'" >'+communes[i].name+'</option>';
+      }
+      
+    } 
+     
+   }
+
+   document.querySelector(".com2").innerHTML = outp;
  }

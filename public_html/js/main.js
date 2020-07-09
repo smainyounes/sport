@@ -13,3 +13,8 @@ function f1(x) {
 	var strUser = x.options[x.selectedIndex].value;
 	commune11(strUser);
 }
+
+function f2(x) {
+	var strUser = x.options[x.selectedIndex].value;
+	commune11(strUser, true);
+}
